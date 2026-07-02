@@ -9,6 +9,8 @@ abstract class StopWatchEvent extends Equatable {
 
 class StartWatch extends StopWatchEvent {}
 
+class TickWatch extends StopWatchEvent {}
+
 class PauseWatch extends StopWatchEvent {}
 
 class ResettWatch extends StopWatchEvent {}

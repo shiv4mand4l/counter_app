@@ -29,29 +29,37 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
               mainAxisAlignment: .center,
               spacing: 20,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    context.read<StopWatchBloc>().add(StartWatch());
-                  },
-                  child: Text(
-                    'Add',
-                    style: TextStyle(fontSize: 16, fontWeight: .bold),
+                BlocBuilder<StopWatchBloc, StopWatchState>(
+                  builder: (context, state) => ElevatedButton(
+                    onPressed: () {
+                      context.read<StopWatchBloc>().add(StartWatch());
+                    },
+                    child: Text(
+                      state.second == 0 ? 'Start' : 'Resume',
+                      style: TextStyle(fontSize: 16, fontWeight: .bold),
+                    ),
                   ),
                 ),
 
-                ElevatedButton(
-                  onPressed: () {
-                    context.read<StopWatchBloc>().add(PauseWatch());
-                  },
-                  child: Text(
-                    'Remove',
-                    style: TextStyle(fontSize: 16, fontWeight: .bold),
+                BlocBuilder<StopWatchBloc, StopWatchState>(
+                  builder: (context, state) => ElevatedButton(
+                    onPressed: state.isRunning
+                        ? () {
+                            context.read<StopWatchBloc>().add(PauseWatch());
+                          }
+                        : () => 'Paused',
+                    child: Text(
+                      'Pause',
+                      style: TextStyle(fontSize: 16, fontWeight: .bold),
+                    ),
                   ),
                 ),
               ],
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                context.read<StopWatchBloc>().add(ResettWatch());
+              },
               child: Text(
                 'Reset',
                 style: TextStyle(fontSize: 16, fontWeight: .bold),
