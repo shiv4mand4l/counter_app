@@ -36,7 +36,10 @@ class _SwitchExampleScreenState extends State<SwitchExampleScreen> {
                   style: TextStyle(fontSize: 24, color: Colors.deepPurple),
                 ),
                 BlocBuilder<SwitchBloc, SwitchState>(
+                  buildWhen: (previous, current) =>
+                      previous.isSwitched != current.isSwitched,
                   builder: (context, state) {
+                    print('switch is building');
                     return Switch(
                       value: state.isSwitched,
                       onChanged: (value) {
@@ -58,7 +61,11 @@ class _SwitchExampleScreenState extends State<SwitchExampleScreen> {
               },
             ),
             BlocBuilder<SliderBloc, SliderState>(
+              buildWhen: (previous, current) =>
+                  previous.slider != current.slider,
               builder: (context, state) {
+                print('slider is building');
+
                 return Slider(
                   value: state.slider,
                   onChanged: (value) {
