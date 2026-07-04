@@ -1,4 +1,5 @@
 # counter_app
+This project is basically for my own to practice all the basic fundamental of flutter.
 
 A new Flutter project.
 
